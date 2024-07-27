@@ -51,7 +51,17 @@ function handleNoTipClick() {
   fourty.value += 1;
 }
 
-function handleTipClick() {
+function handleTipClick(event: MouseEvent) {
+  var topButtonRect = noTipRef.value.getBoundingClientRect();
+  var isClickOnTopButton =
+    event.clientX >= topButtonRect.left &&
+    event.clientX <= topButtonRect.right &&
+    event.clientY >= topButtonRect.top &&
+    event.clientY <= topButtonRect.bottom;
+
+  if (isClickOnTopButton) {
+    return;
+  }
   loading.value = true;
   noTipRef.value.$el.style.position = "";
   noTipRef.value.$el.style.left = "";
